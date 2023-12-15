@@ -13,15 +13,15 @@ public class FindTheDifferenceTwoArrays {
 	
 	@Test
 	public void test_twoPointer() {
-		int[] n1= {1,2,3};
+		int[] n1= {1,2,3,1}; 
 		int[] n2= {2,4,6};
 		findDifference(n1,n2);
 	}
 
 	public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
 		List<Integer> list1=new ArrayList<Integer>();
-		List<Integer> list2=new ArrayList<Integer>();
-		int left=0,right=0;
+		List<Integer> list2=new ArrayList<Integer>(); 
+		int left=0,right=0;  
 		while(left<nums1.length && right<nums2.length) {
 			if(nums1[left]<nums2[right]) {
 				if(!(list1.isEmpty() || list1.get(list1.size()-1)!=nums1[left])){
