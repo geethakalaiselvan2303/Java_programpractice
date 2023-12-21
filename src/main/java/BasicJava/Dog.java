@@ -1,6 +1,8 @@
 package BasicJava;
 
- class Dog {
+import org.testng.annotations.Test;
+
+class Dog {
     String name;   // Defaults to null
     String breed;  // Defaults to null
     int cost;      // Defaults to 0

@@ -1,6 +1,7 @@
 package DSA.Twopointer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,33 +20,36 @@ public class UncommonWordsFromTwoSentences {
 	 * 	 3. Add the left over map value in the list
 	 */
 	
-	@Test
+	//@Test
 	public void test_unCommonWords() {
 		uncommonFromSentences("this apple is sweet","this apple is sour");
 	}
 	
 	@Test
 	public void test_unCommonWords2() {
-		uncommonFromSentences("this apple is","this");
+		String[] uncommonFromSentences = uncommonFromSentences("abcd def abcd xyz","ijk def ijk");
+		System.out.println(Arrays.toString(uncommonFromSentences));
 	}
 	
 	public String[] uncommonFromSentences(String s1, String s2) {
 		List<String> list=new ArrayList<String>();
-		Map<String,Integer> map=new HashMap<String,Integer>();
+		Map<String,Integer> map1=new HashMap<String,Integer>();
+		Map<String,Integer> map2=new HashMap<String,Integer>();
 		for (String s : s1.split(" ")) {
-			map.put(s, map.getOrDefault(s, 0)+1);
+			map1.put(s, map1.getOrDefault(s, 0)+1);
 		}
-		for (String ss : s2.split(" ")) {
-			if(map.containsKey(ss) && map.get(ss)==1) {
-				map.remove(ss);
-			}
-			else {
-				list.add(ss);
-			}
+		for (String s : s2.split(" ")) {
+			map2.put(s, map2.getOrDefault(s, 0)+1);
 		}
+			
+		for (Map.Entry<String,Integer> entry : map1.entrySet()) {
+			if(entry.getValue()==1 && !map2.containsKey(entry.getKey())) {
+				list.add(entry.getKey());
+			}
+			}
 		
-		for (Map.Entry<String,Integer> entry : map.entrySet()) {
-			if(entry.getValue()==1) {
+		for (Map.Entry<String,Integer> entry : map2.entrySet()) {
+			if(entry.getValue()==1 && !map1.containsKey(entry.getKey())) {
 				list.add(entry.getKey());
 			}
 			}

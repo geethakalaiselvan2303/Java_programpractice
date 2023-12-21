@@ -15,27 +15,38 @@ public class ReversingTheSentences {
 	
 	@Test
 	public void testMagazineRansome() {
-		reversingTheSentences("I am happy  engineer");
-//		Assert.assertEquals(, );
+		String reversingTheSentences = reversingTheSentences("I am happy  engineer");
+		Assert.assertEquals(reversingTheSentences,"I ma yppah  reenigne");
 	}
 	
-	public void reversingTheSentences(String s) {
-		String[] splitEachWord = s.split("//s");
-		for (int i = 0; i < splitEachWord.length; i++) {
-			String reverseString = reverseString(splitEachWord[i]);
-			
+	public String reversingTheSentences(String s) {
+		int left=0,right=0;
+		while(right<s.length()) {
+			if(!Character.isLetterOrDigit(s.charAt(left)) && !Character.isLetterOrDigit(s.charAt(right))) {
+				left++;
+		    	right++;
+			}
+			else if(Character.isLetterOrDigit(s.charAt(left))&& Character.isLetterOrDigit(s.charAt(right)) && 
+					!Character.isLetterOrDigit(s.charAt(right))) {
+				right++;
+			}
+			else {
+				reverseString(s,left,right);
+				left++;
+				right++;
+			}
 		}
-		
+		return s;
 	}
 
-	public String reverseString(String str) {
-		int left=0,right=str.length()-1;
+	public String reverseString(String str,int left,int right) {
 		char[] ch = str.toCharArray();
-		int start=0,end=str.length()-1;
-		while(start<end) {
-			char temp=ch[start];
-			ch[start]=ch[end];
-			ch[end--]=temp;
+		while(left<right) {
+			char temp=ch[left];
+			ch[left]=ch[right];
+			ch[right]=temp;
+			left++;
+			right--;
 		}
 		return String.valueOf(ch);
 		
